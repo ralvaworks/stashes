@@ -1,0 +1,27 @@
+Remove case from ED 2021 set
+
+DESCRIPTION
+
+Hi NLPSE,
+I would like to have the following case removed from ED 2021 set, it has been erroring out since around version 350-360.  It always errors out the first time it's coded/resolved, but it's always successful the second time.  
+
+658279780  --> DocID
+
+
+
+ATTACHMENTS
+
+Delete Pro DocID.sql
+
+	-- SERVER: CACALQDBPRO002\NLPDEVSQL2019
+
+	USE NLPRegression_Actus7
+
+
+	-- Enter the DocID you want to delete
+	DECLARE @DocID bigint = 
+
+	-- Run this stored proc
+	EXEC spNLPDeleteDocumentRange @DocID, @DocID
+
+

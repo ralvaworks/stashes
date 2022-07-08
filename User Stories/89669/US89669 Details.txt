@@ -1,0 +1,57 @@
+New CM descriptions needed for April 1st
+
+DESCRIPTION
+
+Please add the following codes and code descriptions to the regression databases and debuggers (UD and V2).
+
+Per CM Rally Story: US89412
+Three new diagnosis codes for reporting COVID-19 vaccination status will go into effect April 1, 2022. The codes were presented by the National Center for Health Statistics (NCHS) at the Sept. 14-15, ICD-10 Coordination and Maintenance Committee meeting, so they are not listed in the 2022 ICD-10-CM code book.
+
+The new ICD-10-CM codes for reporting COVID-19 vaccination status are:
+Z28.310    Unvaccinated for COVID-19
+Z28.311    Partially vaccinated for COVID-19
+Z28.39     Other underimmunization status
+
+The ICD-10 Medicare Code Editor Version 39.1 will include these codes in its edits to validate correct coding on claims for discharges on or after April 1, 2022.
+
+
+
+ATTACHMENTS
+
+Add DM Dx Codes.sql
+
+	-- SERVER: CACALQDBENT001
+
+	USE ACTUS_NLP_ICD10
+
+	-- This is the valid set of ICD10CM codes.  You need to add the three new codes to this table.
+	SELECT * FROM LUICD10DiagnosisCodes WHERE TerminationDate IS NULL AND Invalid = 0
+
+
+
+NOTES
+
+You'll need to update the code descriptions in these files:
+https://github.optum.com/clinical-language-intelligence/debuggers/blob/master/UnifiedDebugger/CodeDefinitions/yost_icd10.txt
+https://github.optum.com/clinical-language-intelligence/debuggers/blob/tools/Debuggers_Beta/NLPDebuggerV2/NLPDebuggerv2/data/ICD_10_cm_desc.txt
+
+And you'll have to update a table in the database.  See the attached sql file.
+
+
+
+
+
+== === == === == === == === == === == === == === == === == === == === == === 
+
+Z28.310|UNVACCINATED FOR COVID-19
+Z28.311|PARTIALLY VACCINATED FOR COVID-19
+Z28.39|OTHER UNDERIMMUNIZATION STATUS
+
+
+INSERT INTO LUICD10DiagnosisCodes
+(DiagnosisCode, ShortDesc, LongDesc, POAExempt, CCType, StartDate, Invalid)
+VALUES
+('Z28.310', 'Unvaccinated for COVID-19', 'Unvaccinated for COVID-19', 0, 0, '2022-01-21', 0),
+('Z28.311', 'Partially vaccinated for COVID-19', 'Partially vaccinated for COVID-19', 0, 0, '2022-01-21', 0),
+('Z28.39', 'Other underimmunization status', 'Other underimmunization status', 0, 0, '2022-01-21', 0);
+
